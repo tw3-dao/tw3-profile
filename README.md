@@ -19,7 +19,7 @@ npm install
 
 # 3. Run the interactive profile wizard
 npm run create-profile            # browser wallet
-npm run create-profile -- --ethers  # local key from .env
+npm run create-profile:ethers     # local key from .env
 
 # 4. Verify locally
 npm run validate
@@ -32,25 +32,25 @@ git push
 
 ## Commands
 
-### `npm run create-profile`
+### `npm run create-profile` / `npm run create-profile:ethers`
 
 Guided wizard that detects your GitHub username from the git remote, prompts for
 a display name, then signs your profile.
 
-| Flag | Description |
+| Command | Description |
 | --- | --- |
-| _(none)_ | Opens a browser page with a multi-wallet connector |
-| `--ethers` | Signs with a local private key or mnemonic from `.env` |
+| `npm run create-profile` | Opens a browser page with a multi-wallet connector |
+| `npm run create-profile:ethers`| Signs with a local private key or mnemonic from `.env` |
 
-### `npm run sign-data`
+### `npm run sign-data` / `npm run sign-data:ethers`
 
 Re-sign an existing `profile.json` without changing the display name or GitHub
 username. Useful after rotating keys.
 
-| Flag | Description |
+| Command | Description |
 | --- | --- |
-| `--wallet` _(default)_ | Browser wallet signing |
-| `--ethers` | Local ethers signing |
+| `npm run sign-data` | Browser wallet signing |
+| `npm run sign-data:ethers` | Local ethers signing |
 
 ### `npm run validate`
 
@@ -79,12 +79,12 @@ ETHERS_KEY="0xabc123..."
 
 Set **one**, not both. The `.env` file is git-ignored.
 
-When using `--ethers`, the script derives the EVM address from your key
+When using the `:ethers` version of the commands, the script derives the EVM address from your key
 automatically — you do not need to enter it.
 
 ## Browser wallet mode
 
-When run without `--ethers`, a local web server starts on a random port and
+When run without the `:ethers` suffix, a local web server starts on a random port and
 opens in your default browser. The page discovers all injected EVM wallets
 (MetaMask, Coinbase Wallet, Brave, Rabby, etc.) via EIP-6963.
 
@@ -135,7 +135,7 @@ fork's settings.
 
 | Problem | Fix |
 | --- | --- |
-| `No .env file found` | Create `.env` from `.env.example` (only needed for `--ethers`) |
+| `No .env file found` | Create `.env` from `.env.example` (only needed for `:ethers` commands) |
 | `Both ETHERS_MNEMONIC and ETHERS_KEY are set` | Remove one from `.env` |
 | `githubName does not match expected owner` | Your `githubName` must match your GitHub username (the fork owner) |
 | Browser doesn't open | Visit the URL printed in the terminal manually |
